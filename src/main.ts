@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { patchNestjsSwagger, ZodValidationPipe } from '@anatine/zod-nestjs';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { HttpExceptionFilter } from './infrastructure/exception-filters/http-exception.filter';
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -16,6 +17,7 @@ async function bootstrap() {
 	app.useBodyParser('urlencoded', { extended: true, limit: '1mb' });
 
 	app.useGlobalPipes(new ZodValidationPipe());
+	app.useGlobalFilters(new HttpExceptionFilter());
 
 	patchNestjsSwagger();
 

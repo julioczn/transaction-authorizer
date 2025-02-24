@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+	id String @id @default(uuid())
+	balanceFood Decimal @default(0.00)
+	balanceMeal Decimal @default(0.00)
+	balanceCash Decimal @default(0.00)
+	createdAt DateTime @default(now())
+	updateAt DateTime @updatedAt
+	transactions Transaction[]
+}
+
+model Transaction {
+	id String @id @default(uuid())
+	account Account? @relation(fields: [accountId], references: [id])
+	accountId String?
+	amount Decimal
+	merchant String
+	mcc String
+	category Category
+	status Status
+	createdAt DateTime @default(now())
+}
+
+enum Category {
+	FOOD
+	MEAL
+	CASH
+}
+
+enum Status {
+	APPROVED
+	REJECTED
+}

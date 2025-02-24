@@ -1,10 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { PrismaService } from './infrastructure/database/prisma/prisma.service';
+import { TransactionRepositoryImpl } from './domain/repositories/transaction.repository';
+import { TransactionController } from './infrastructure/controllers/transaction.controller';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [],
+	controllers: [TransactionController],
+	providers: [
+		PrismaService,
+		{
+			provide: 'ITransactionRepository',
+			useClass: TransactionRepositoryImpl,
+		},
+	],
 })
 export class AppModule {}
