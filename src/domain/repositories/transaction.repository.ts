@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ITransactionRepository } from '../interfaces/i-transaction.repository';
-import { PrismaService } from 'src/infrastructure/database/prisma/prisma.service';
+import { PrismaService } from '../../infrastructure/database/prisma/prisma.service';
 import { Transaction } from '../entities/transaction.entity';
+import { TransactionCategory } from '../enums/transaction-category.enum';
 
 @Injectable()
 export class TransactionRepositoryImpl implements ITransactionRepository {
@@ -19,13 +20,19 @@ export class TransactionRepositoryImpl implements ITransactionRepository {
 			},
 		});
 
+		const category =
+			TransactionCategory[
+				newTransaction.category as keyof typeof TransactionCategory
+			];
+
 		return new Transaction(
 			newTransaction.accountId!,
 			Number(newTransaction.amount),
 			newTransaction.merchant,
 			String(newTransaction.mcc),
-			newTransaction.category,
+			category,
 			newTransaction.status as 'APPROVED' | 'REJECTED',
+			newTransaction.id,
 		);
 	}
 }

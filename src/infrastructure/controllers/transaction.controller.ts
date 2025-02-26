@@ -1,7 +1,9 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ProcessTransactionDto } from 'src/application/dtos/process-transaction.dto';
-import { CreateTransactionResponseDto } from './response.dto';
+import {
+	CreateTransactionResponseDto,
+	ProcessTransactionDto,
+} from './dtos/process-transaction.dto';
 
 @Controller('transactions')
 @ApiTags('transactions')

@@ -28,3 +28,17 @@ export const ProcessTransactionSchema = z.object({
 export class ProcessTransactionDto extends createZodDto(
 	ProcessTransactionSchema,
 ) {}
+
+enum responseCodeEnum {
+	APPROVED = '00',
+	INSUFFICIENT_FUNDS = '51',
+	TRANSACTION_NOT_PERMITTED = '07',
+}
+
+const createTransactionResponse = z.object({
+	code: z.nativeEnum(responseCodeEnum),
+});
+
+export class CreateTransactionResponseDto extends createZodDto(
+	createTransactionResponse,
+) {}

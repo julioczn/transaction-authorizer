@@ -1,10 +1,13 @@
+import { TransactionCategory } from '../enums/transaction-category.enum';
+
 export class Transaction {
 	constructor(
 		public readonly accountId: string,
 		public readonly amount: number,
 		public readonly merchant: string,
 		public readonly mcc: string,
-		public readonly category: 'FOOD' | 'MEAL' | 'CASH',
+		public readonly category: TransactionCategory,
 		public readonly status: 'APPROVED' | 'REJECTED',
+		public readonly id?: string,
 	) {}
 }
