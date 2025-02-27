@@ -16,7 +16,6 @@ export class TransactionRepositoryImpl implements ITransactionRepository {
 				merchant: transaction.merchant,
 				mcc: transaction.mcc,
 				category: transaction.category,
-				status: transaction.status,
 			},
 		});
 
@@ -31,7 +30,6 @@ export class TransactionRepositoryImpl implements ITransactionRepository {
 			newTransaction.merchant,
 			String(newTransaction.mcc),
 			category,
-			newTransaction.status as 'APPROVED' | 'REJECTED',
 			newTransaction.id,
 		);
 	}

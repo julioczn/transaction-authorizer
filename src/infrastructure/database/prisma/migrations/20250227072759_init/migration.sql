@@ -1,9 +1,6 @@
 -- CreateEnum
 CREATE TYPE "Category" AS ENUM ('FOOD', 'MEAL', 'CASH');
 
--- CreateEnum
-CREATE TYPE "Status" AS ENUM ('APPROVED', 'REJECTED');
-
 -- CreateTable
 CREATE TABLE "Account" (
     "id" TEXT NOT NULL,
@@ -24,7 +21,6 @@ CREATE TABLE "Transaction" (
     "merchant" TEXT NOT NULL,
     "mcc" TEXT NOT NULL,
     "category" "Category" NOT NULL,
-    "status" "Status" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")

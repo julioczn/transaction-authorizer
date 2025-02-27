@@ -1,24 +1,25 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
 	CreateTransactionResponseDto,
 	ProcessTransactionDto,
-} from './dtos/process-transaction.dto';
+} from './dtos/transaction.dto';
+import { ProcessTransactionUseCase } from '../../application/use-cases/process-transaction.use-case';
 
 @Controller('transactions')
 @ApiTags('transactions')
 export class TransactionController {
-	constructor() {}
+	constructor(
+		private readonly processTransactionUseCase: ProcessTransactionUseCase,
+	) {}
 
 	@Post('/')
-	@HttpCode(200)
+	@HttpCode(HttpStatus.OK)
 	@ApiResponse({
 		type: CreateTransactionResponseDto,
 		description: 'Transaction created successfully',
 	})
-	// TODO: remove eslint-disable-next-line
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	createTransaction(@Body() transaction: ProcessTransactionDto) {
-		// TODO: Implement controller
+	async createTransaction(@Body() transaction: ProcessTransactionDto) {
+		return this.processTransactionUseCase.execute(transaction);
 	}
 }

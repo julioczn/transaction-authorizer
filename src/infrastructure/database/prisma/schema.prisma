@@ -25,7 +25,6 @@ model Transaction {
   merchant  String
   mcc       String
   category  Category
-  status    Status
   createdAt DateTime @default(now())
 }
 
@@ -33,9 +32,4 @@ enum Category {
   FOOD
   MEAL
   CASH
-}
-
-enum Status {
-  APPROVED
-  REJECTED
 }

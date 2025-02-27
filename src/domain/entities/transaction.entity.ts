@@ -7,7 +7,6 @@ export class Transaction {
 		public readonly merchant: string,
 		public readonly mcc: string,
 		public readonly category: TransactionCategory,
-		public readonly status: 'APPROVED' | 'REJECTED',
 		public readonly id?: string,
 	) {}
 }

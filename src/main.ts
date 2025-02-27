@@ -24,6 +24,7 @@ async function bootstrap() {
 	const config = new DocumentBuilder()
 		.setTitle('Transaction Authorizer API')
 		.setVersion('1.0')
+		.addApiKey()
 		.build();
 
 	const document = SwaggerModule.createDocument(app, config);

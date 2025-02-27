@@ -4,6 +4,9 @@ import { TransactionRepositoryImpl } from './domain/repositories/transaction.rep
 import { TransactionController } from './infrastructure/controllers/transaction.controller';
 import { ConfigModule } from '@nestjs/config';
 import { AccountRepositoryImpl } from './domain/repositories/account.repository';
+import { ProcessTransactionUseCase } from './application/use-cases/process-transaction.use-case';
+import { AccountController } from './infrastructure/controllers/account.controller';
+import { CreateAccountUseCase } from './application/use-cases/create-account.use-case';
 
 @Module({
 	imports: [
@@ -19,7 +22,7 @@ import { AccountRepositoryImpl } from './domain/repositories/account.repository'
 			},
 		}),
 	],
-	controllers: [TransactionController],
+	controllers: [TransactionController, AccountController],
 	providers: [
 		PrismaService,
 		{
@@ -30,6 +33,8 @@ import { AccountRepositoryImpl } from './domain/repositories/account.repository'
 			provide: 'IAccountRepository',
 			useClass: AccountRepositoryImpl,
 		},
+		ProcessTransactionUseCase,
+		CreateAccountUseCase,
 	],
 })
 export class AppModule {}

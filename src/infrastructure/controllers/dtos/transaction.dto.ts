@@ -1,15 +1,12 @@
 import { createZodDto } from '@anatine/zod-nestjs';
 import { extendZodWithOpenApi } from '@anatine/zod-openapi';
 import { z } from 'zod';
+import { ResponseCodeEnum } from '../../../domain/enums/transaction-category.enum';
 
 extendZodWithOpenApi(z);
 
 export const ProcessTransactionSchema = z.object({
-	account: z
-		.string()
-		.min(1, 'Account is required')
-		.max(20)
-		.openapi({ example: '123' }),
+	account: z.string().min(1, 'Account is required').openapi({ example: '123' }),
 	amount: z
 		.number()
 		.positive('Amount must be greater than 0')
@@ -29,14 +26,8 @@ export class ProcessTransactionDto extends createZodDto(
 	ProcessTransactionSchema,
 ) {}
 
-enum responseCodeEnum {
-	APPROVED = '00',
-	INSUFFICIENT_FUNDS = '51',
-	TRANSACTION_NOT_PERMITTED = '07',
-}
-
 const createTransactionResponse = z.object({
-	code: z.nativeEnum(responseCodeEnum),
+	code: z.nativeEnum(ResponseCodeEnum),
 });
 
 export class CreateTransactionResponseDto extends createZodDto(
