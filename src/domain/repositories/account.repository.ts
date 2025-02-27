@@ -12,15 +12,23 @@ export class AccountRepositoryImpl implements IAccountRepository {
 		accountId: string,
 		category: string,
 		amount: number,
+		version: number,
 	): Promise<void> {
-		await this.prisma.account.update({
-			where: { id: accountId },
+		const result = await this.prisma.account.updateMany({
+			where: { id: accountId, version: version },
 			data: {
 				[`balance${category}`]: {
 					decrement: amount,
 				},
+				version: {
+					increment: 1,
+				},
 			},
 		});
+
+		if (result.count === 0) {
+			throw new Error('Optimistic locking conflict: Transaction aborted');
+		}
 	}
 
 	async create(
@@ -61,6 +69,7 @@ export class AccountRepositoryImpl implements IAccountRepository {
 			Number(account.balanceFood),
 			Number(account.balanceMeal),
 			Number(account.balanceCash),
+			Number(account.version),
 		);
 	}
 }

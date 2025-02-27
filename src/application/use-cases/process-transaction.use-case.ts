@@ -106,6 +106,7 @@ export class ProcessTransactionUseCase {
 			account,
 			normalizedCategory,
 			amount,
+			accountData.version,
 		);
 
 		await this.transactionRepository.create({

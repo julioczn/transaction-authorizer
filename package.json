@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky",
 		"docker:up": "docker compose up -d",
-		"prisma:migrate": "prisma migrate dev --name init --schema=./src/infrastructure/database/prisma/schema.prisma"
+		"prisma:migrate": "prisma migrate dev --schema=./src/infrastructure/database/prisma/schema.prisma --name "
   },
   "dependencies": {
     "@anatine/zod-nestjs": "^2.0.10",

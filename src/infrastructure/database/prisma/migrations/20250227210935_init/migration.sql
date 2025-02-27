@@ -9,6 +9,7 @@ CREATE TABLE "Account" (
     "balanceCash" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateAt" TIMESTAMP(3) NOT NULL,
+    "version" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
 );

@@ -128,6 +128,10 @@ http://localhost:3000/docs
 - `docker-compose.yml`: Configuração do Docker Compose
 - `.env`: Arquivo de variáveis de ambiente
 
+## Utilização de Lock Otimista
+
+Para evitar problemas de concorrência, utilizei um lock otimista. O lock otimista é uma técnica que permite múltiplas transações lerem um recurso sem bloqueio, mas garante que apenas uma transação possa fazer alterações no recurso. Isso é feito verificando se o recurso não foi modificado por outra transação antes de aplicar as mudanças.
+
 ## Licença
 
 Este projeto está licenciado sob a licença MIT.

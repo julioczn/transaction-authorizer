@@ -5,6 +5,7 @@ export interface IAccountRepository {
 		accountId: string,
 		category: string,
 		amount: number,
+		version: number,
 	): Promise<void>;
 	create(
 		accountId: string,
