@@ -6,7 +6,7 @@ import {
 	Post,
 	UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { CreateAccountDto, CreateAccountResponseDto } from './dtos/account.dto';
 import { CreateAccountUseCase } from '../../application/use-cases/create-account.use-case';
 import { AuthGuard } from '../auth/auth.guard';
@@ -14,6 +14,7 @@ import { AuthGuard } from '../auth/auth.guard';
 @Controller('accounts')
 @ApiTags('accounts')
 @UseGuards(AuthGuard)
+@ApiSecurity('api_key')
 export class AccountController {
 	constructor(private readonly createAccountUseCase: CreateAccountUseCase) {}
 
